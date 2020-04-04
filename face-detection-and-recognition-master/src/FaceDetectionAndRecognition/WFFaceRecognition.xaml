@@ -6,7 +6,6 @@
     xmlns:local="clr-namespace:FaceDetectionAndRecognition"
     xmlns:mahappsControls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Барномаи шинохти шахсият аз рӯи қиёфа -2020"
     Width="1000"
     Height="600"
     FontSize="14"

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Timers;
 using System.Windows;
@@ -22,6 +23,11 @@ namespace FaceDetectionAndRecognition
 
     public partial class WFFaceRecognition : MetroWindow, INotifyPropertyChanged
     {
+        EntityContext entityContext;
+        IEnumerable<User> users;
+        List<FoundedUserViewModel> foundedUserViews;
+
+
         public WFFaceRecognition()
         {
             InitializeComponent();
@@ -32,10 +38,10 @@ namespace FaceDetectionAndRecognition
             };
             captureTimer.Elapsed += CaptureTimer_Elapsed;
             DataContext = this;
-            var context = EntityContext.CreateInstance();
-            //var person = new User();
-            //context.Users.Add(person);
-            //context.SaveChanges();
+            entityContext = EntityContext.CreateInstance();
+            users = entityContext.Users.ToList();
+            foundedUserViews = new List<FoundedUserViewModel>();
+
             this.RegistrationView = new RegistrationViewModel();
         }
 
@@ -93,6 +99,12 @@ namespace FaceDetectionAndRecognition
         }
 
         public RegistrationViewModel RegistrationView { get; set; }
+        FoundedUserViewModel foundedUserViewModel;
+        public FoundedUserViewModel FoundedUserViewModel
+        {
+            get => foundedUserViewModel;
+            set { foundedUserViewModel = value; NotifyPropertyChanged(); }
+        }
 
         #endregion
 
@@ -197,16 +209,13 @@ namespace FaceDetectionAndRecognition
                     MCvAvgComp[][] faces = grayframe.DetectHaarCascade(haarCascade, 1.2, 10, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new System.Drawing.Size(20, 20));
 
                     FaceName = "Қиёфа ётф нашуд!!!!";
-                    foreach (var item in faces)
+foreach (var face in faces[0])
                     {
-                        foreach (var face in item)
-                        {
-                            bgrFrame.Draw(face.rect, new Bgr(255, 255, 0), 2);
-                            detectedFace = bgrFrame.Copy(face.rect).Convert<Gray, byte>();
-                            FaceRecognition();
-                        }
-                    }
-                    CameraCapture = bgrFrame.ToBitmap();
+                        bgrFrame.Draw(face.rect, new Bgr(255, 255, 0), 2);
+                        detectedFace = bgrFrame.Copy(face.rect).Convert<Gray, byte>();
+                        FaceRecognition();
+                        break;
+                    }                    CameraCapture = bgrFrame.ToBitmap();
                 }
                 catch (Exception ex)
                 {
@@ -224,8 +233,19 @@ namespace FaceDetectionAndRecognition
                 MCvTermCriteria termCrit = new MCvTermCriteria(lList.Count, 0.001);
                 //Eigen Face Algorithm
                 EigenObjectRecognizer recognizer = new EigenObjectRecognizer(imageList.ToArray(), lList.ToArray(), 3000, ref termCrit);
-                string faceName = recognizer.Recognize(detectedFace.Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC));
+                string faceName = recognizer.Recognize(detectedFace.Resize(100, 100, INTER.CV_INTER_CUBIC));
                 FaceName = faceName;
+
+                if (foundedUserViews.FirstOrDefault(u => u.FullName == faceName) is FoundedUserViewModel foundedUser && foundedUser != null)
+                {
+                    FoundedUserViewModel = foundedUser;
+                }
+                else if (users.FirstOrDefault(u => u.FullName == faceName) is User user && user != null)
+                {
+                    FoundedUserViewModel = new FoundedUserViewModel(user.FirstName, user.LastName, user.Birthday, user.PhoneNumber, user.Address);
+                    foundedUserViews.Add(FoundedUserViewModel);
+                }
+
                 CameraCaptureFace = detectedFace.ToBitmap();
             }
             else
@@ -274,6 +294,20 @@ namespace FaceDetectionAndRecognition
             detectedFace.Save(Config.FacePhotosPath + "face" + (faceList.Count + 1) + Config.ImageFileExtension);
             StreamWriter writer = new StreamWriter(Config.FaceListTextFile, true);
             writer.WriteLine(String.Format("face{0}:{1}", (faceList.Count + 1), personName));
+            if (!entityContext.Users.Any(u => u.LastName == RegistrationView.LastName && u.FirstName == RegistrationView.FirstName))
+            {
+                var user = new User()
+                {
+                    FirstName = RegistrationView.FirstName,
+                    LastName = RegistrationView.LastName,
+                    Birthday = RegistrationView.Birthday,
+                    Address = RegistrationView.Address,
+                    PhoneNumber = RegistrationView.PhoneNumber
+                };
+                entityContext.Users.Add(user);
+                entityContext.SaveChanges();
+            }
+
             writer.Close();
             GetFacesList();
             MessageBox.Show("Бомуваффикият сабт шуд .");

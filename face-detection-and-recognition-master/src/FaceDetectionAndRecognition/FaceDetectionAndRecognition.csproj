@@ -80,6 +80,7 @@
     <Compile Include="Database\EntityContext.cs" />
     <Compile Include="FaceData.cs" />
     <Compile Include="Model\Person.cs" />
+    <Compile Include="ViewModels\FoundedUserViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="WFAbout.xaml.cs">
       <DependentUpon>WFAbout.xaml</DependentUpon>
