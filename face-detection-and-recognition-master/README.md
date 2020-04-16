@@ -1,20 +1,24 @@
-English | [Tajik](./README.Tj-Tajik.md)
+[English](./README.md) | Tajik
 
 <div align="center">
 
 <img width="300" src="./static/head.png"/>
 
-<h1 align="center">Face Detection and Recognition with C# EmguCV</h1>
+<h1 align="center">C# EmguCV  барномаи шинохтани шахсият аз руи қиёфа</h1>
 
 </div>
 
 
 
-### What is Emgu CV?
+### EmguCV Nedir?
 
 Emgu CV is a cross platform .Net wrapper to the OpenCV image processing library. Allowing OpenCV functions to be called from .NET compatible languages such as C#, VB, VC++, IronPython etc. The wrapper can be compiled by Visual Studio, Xamarin Studio and Unity, it can run on Windows, Linux, Mac OS X, iOS, Android and Windows Phone.
 
-### Algorithms
+### Algoritmalar
+
+- Blog post for [Haar Cascade Classifier]()
+- Blog post for [Eigenfaces, Fisherfaces, LBPH]()
+- <a href="https://github.com/mesutpiskin/computer-vision-guide">Image Processing and Computer Vision Documentation Project (EN, Tajik)</a>
 
 <img  width="600" src="./static/workflow.svg"/>
 
@@ -28,24 +32,21 @@ The Eigenface approach is considered by many to be the first working facial reco
 
 The **_Viola–Jones_** object detection framework is the first object detection framework to provide competitive object detection rates in real-time proposed in 2001 by Paul Viola and Michael Jones. Although it can be trained to detect a variety of object classes, it was motivated primarily by the problem of face detection.
 
+<img width="500" src="https://preview.ibb.co/cxdBpp/Screen_Shot_2018_09_11_at_16_45_51.png"/>
 
-### Requirements
+### Gereksinimler
 
 - [Visual Studio](https://visualstudio.microsoft.com/)
-- Min [EmguCV 2.2.1](https://sourceforge.net/projects/emgucv/files/emgucv/2.2.1/)
+- Minimum [EmguCV 2.2.1](https://sourceforge.net/projects/emgucv/files/emgucv/2.2.1/)
 
 
-### Hot to Run?
+### Nasıl Çalıştırlır?
 
 - Download or clone project
 
 ```sh
-git clone https://github.com/ShOtabekov/FaceRecognitionWPF.git
+git clone https://github.com/mesutpiskin/face-detection-and-recognition.git
 ```
 
 - Update the **./Config.cs** file to change configuration settings.
-- Build and run project with Visual Studio (Suggested 2017+ version)
-
-
-### Video
-</a>
+- Build and run project with Visual Studio (Suggested 2017+ version
