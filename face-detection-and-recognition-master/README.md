@@ -28,7 +28,6 @@ The Eigenface approach is considered by many to be the first working facial reco
 
 The **_Viola–Jones_** object detection framework is the first object detection framework to provide competitive object detection rates in real-time proposed in 2001 by Paul Viola and Michael Jones. Although it can be trained to detect a variety of object classes, it was motivated primarily by the problem of face detection.
 
-<img width="500" src="https://preview.ibb.co/cxdBpp/Screen_Shot_2018_09_11_at_16_45_51.png"/>
 
 ### Requirements
 
@@ -41,7 +40,7 @@ The **_Viola–Jones_** object detection framework is the first object detection
 - Download or clone project
 
 ```sh
-git clone https://github.com/mesutpiskin/face-detection-and-recognition.git
+git clone https://github.com/ShOtabekov/FaceRecognitionWPF.git
 ```
 
 - Update the **./Config.cs** file to change configuration settings.
@@ -49,7 +48,4 @@ git clone https://github.com/mesutpiskin/face-detection-and-recognition.git
 
 
 ### Video
-
-<a href="https://youtu.be/0wxWdCc_TFo">
-<img width="500" src="./static/video.png"/>
 </a>
