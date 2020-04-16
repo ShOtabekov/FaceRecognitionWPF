@@ -1,0 +1,45 @@
+﻿<Window x:Class="FaceDetectionAndRecognition.WFFaceRecognition"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FaceDetectionAndRecognition"
+        mc:Ignorable="d"
+        Title="Барномаи шинохти шахсият аз рӯи қиёфа -2020" Height="500" FontWeight="Black" FontStyle="Italic" FontSize="14" Width="600" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Grid Background="SeaGreen">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="95*"/>
+            <ColumnDefinition Width="201*"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="imgCamera"  
+               HorizontalAlignment="Stretch" 
+               VerticalAlignment="Stretch"
+               Width="Auto"
+               Height="Auto"
+               Margin="0,20,0,50" Grid.ColumnSpan="2" />
+        <Label x:Name="lblFaceName"             
+               HorizontalAlignment="Stretch"
+               Width="Auto" 
+               HorizontalContentAlignment="Center"
+               Background="#FFF93307"
+               VerticalAlignment="Bottom" 
+               Height="45" FontSize="22" Foreground="White" Grid.ColumnSpan="2"/>
+        <Image x:Name="imgDetectFace" 
+               HorizontalAlignment="Right" 
+               Height="150" 
+               Margin="0,0,5,50" 
+               VerticalAlignment="Bottom" 
+               Width="150" Grid.Column="1"/>
+        <Menu x:Name="menu"
+              HorizontalAlignment="Stretch" 
+              Height="20" 
+              VerticalAlignment="Top" 
+              Width="Auto" 
+              Background="{x:Null}" Grid.ColumnSpan="2" >
+            <MenuItem Cursor="Hand" Header="Дар бораи лоиҳа" Click="AboutButton_Click" FontWeight="Black" />
+            <MenuItem Cursor="Hand" Header="Дохилкуни қиёфа" Click="NewFaceButton_Click" FontWeight="Black"/>
+            <MenuItem Cursor="Hand" Header="Кушодани файл" Click="OpenVideoFile_Click" FontWeight="Black"/>
+        </Menu>
+
+    </Grid>
+</Window>
