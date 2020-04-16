@@ -1,4 +1,4 @@
-English | [Türkçe](./README.tr-TR.md)
+English | [Tajik](./README.Tj-Tajik.md)
 
 <div align="center">
 
@@ -15,10 +15,6 @@ English | [Türkçe](./README.tr-TR.md)
 Emgu CV is a cross platform .Net wrapper to the OpenCV image processing library. Allowing OpenCV functions to be called from .NET compatible languages such as C#, VB, VC++, IronPython etc. The wrapper can be compiled by Visual Studio, Xamarin Studio and Unity, it can run on Windows, Linux, Mac OS X, iOS, Android and Windows Phone.
 
 ### Algorithms
-
-- Blog post for [Haar Cascade Classifier](http://mesutpiskin.com/blog/321.html)
-- Blog post for [Eigenfaces, Fisherfaces, LBPH](http://mesutpiskin.com/blog/opencv-yuz-tanima-eigenfaces-fisherfaces-lbph.html)
-- <a href="https://github.com/mesutpiskin/computer-vision-guide">Image Processing and Computer Vision Documentation Project (EN, TR)</a>
 
 <img  width="600" src="./static/workflow.svg"/>
 
