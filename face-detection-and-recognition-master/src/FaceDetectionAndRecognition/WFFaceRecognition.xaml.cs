@@ -93,9 +93,9 @@ namespace FaceDetectionAndRecognition
         {
             GetFacesList();
             videoCapture = new Capture(Config.ActiveCameraIndex);
-            videoCapture.SetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FPS, 30);
-            videoCapture.SetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT, 450);
-            videoCapture.SetCaptureProperty(Emgu.CV.CvEnum.CAP_PROP.CV_CAP_PROP_FRAME_WIDTH, 370);
+            videoCapture.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FPS, 30);
+            videoCapture.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_HEIGHT, 450);
+            videoCapture.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_WIDTH, 370);
             captureTimer.Start();
         }
         private void CaptureTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -116,7 +116,7 @@ namespace FaceDetectionAndRecognition
             }
             //Save detected face
             detectedFace = detectedFace.Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
-            detectedFace.Save(Config.FacePhotosPath +"face"+ (faceList.Count + 1) + Config.ImageFileExtension);
+            detectedFace.Save(Config.FacePhotosPath + "face" + (faceList.Count + 1) + Config.ImageFileExtension);
             StreamWriter writer = new StreamWriter(Config.FaceListTextFile, true);
             string personName = Microsoft.VisualBasic.Interaction.InputBox("Номро дохил намоед");
             writer.WriteLine(String.Format("face{0}:{1}", (faceList.Count + 1), personName));
@@ -146,8 +146,10 @@ namespace FaceDetectionAndRecognition
         #region Method
         public void GetFacesList()
         {
+            var currentPath = Directory.GetCurrentDirectory();
+            var haarcascadePath = Path.Combine(currentPath, "Lib", "haarcascade.xml");
             //haar cascade classifier
-            haarCascade = new HaarCascade(@"I:\FD_DDl\haarcascade-frontalface-default.xml");
+            haarCascade = new HaarCascade(haarcascadePath);
             faceList.Clear();
             string line;
             FaceData faceInstance = null;
@@ -172,7 +174,7 @@ namespace FaceDetectionAndRecognition
         private void ProcessFrame()
         {
             bgrFrame = videoCapture.QueryFrame();
-                  
+
             if (bgrFrame != null)
             {
                 try
