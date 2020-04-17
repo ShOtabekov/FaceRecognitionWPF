@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using Emgu.CV;
-using Emgu.CV.Structure;
+﻿using Emgu.CV;
 using Emgu.CV.CvEnum;
-using System.IO;
-using System.Windows;
+using Emgu.CV.Structure;
+using MahApps.Metro.Controls;
+using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
+using System.IO;
+using System.Runtime.CompilerServices;
 using System.Timers;
+using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using System.Runtime.CompilerServices;
-using Microsoft.Win32;
 
 namespace FaceDetectionAndRecognition
 {
 
-    public partial class WFFaceRecognition : Window, INotifyPropertyChanged
+    public partial class WFFaceRecognition : MetroWindow, INotifyPropertyChanged
     {
         #region Properties
         public event PropertyChangedEventHandler PropertyChanged;
@@ -36,7 +37,7 @@ namespace FaceDetectionAndRecognition
             set
             {
                 faceName = value.ToUpper();
-                lblFaceName.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { lblFaceName.Content = faceName; }));
+                //lblFaceName.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { lblFaceName.Text = faceName; }));
                 NotifyPropertyChanged();
             }
         }
@@ -62,7 +63,7 @@ namespace FaceDetectionAndRecognition
             set
             {
                 cameraCaptureFace = value;
-                imgDetectFace.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { imgDetectFace.Source = BitmapToImageSource(cameraCaptureFace); }));
+                //imgDetectFace.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { imgDetectFace.Source = BitmapToImageSource(cameraCaptureFace); }));
                 // imgCamera.Source = BitmapToImageSource(cameraCapture);
                 NotifyPropertyChanged();
             }
@@ -80,6 +81,7 @@ namespace FaceDetectionAndRecognition
 
             };
             captureTimer.Elapsed += CaptureTimer_Elapsed;
+            DataContext = this;
         }
         #endregion
 
@@ -211,7 +213,7 @@ namespace FaceDetectionAndRecognition
                 EigenObjectRecognizer recognizer = new EigenObjectRecognizer(imageList.ToArray(), lList.ToArray(), 3000, ref termCrit);
                 string faceName = recognizer.Recognize(detectedFace.Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC));
                 FaceName = faceName;
-                CameraCaptureFace = detectedFace.ToBitmap();
+                //CameraCaptureFace = detectedFace.ToBitmap();
             }
             else
             {
