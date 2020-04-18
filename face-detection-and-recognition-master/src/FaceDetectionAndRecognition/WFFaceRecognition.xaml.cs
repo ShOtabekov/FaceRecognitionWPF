@@ -213,7 +213,7 @@ namespace FaceDetectionAndRecognition
                 EigenObjectRecognizer recognizer = new EigenObjectRecognizer(imageList.ToArray(), lList.ToArray(), 3000, ref termCrit);
                 string faceName = recognizer.Recognize(detectedFace.Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC));
                 FaceName = faceName;
-                //CameraCaptureFace = detectedFace.ToBitmap();
+                CameraCaptureFace = detectedFace.ToBitmap();
             }
             else
             {

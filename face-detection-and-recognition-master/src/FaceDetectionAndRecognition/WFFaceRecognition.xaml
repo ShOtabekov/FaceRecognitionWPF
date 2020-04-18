@@ -54,10 +54,44 @@
                 Margin="10"
                 BorderBrush="{StaticResource AccentColorBrush4}"
                 BorderThickness="1">
-                <WrapPanel Margin="10" Orientation="Vertical">
-                    <TextBlock FontSize="20" Text="Шахси аник карда шуда" />
-                    <TextBlock Name="uiNameOfPerson" Text="{Binding FaceName}" Margin="10,0" />
-                </WrapPanel>
+                <TabControl>
+                    <TabItem Header="Тфатиш кардан">
+                        <WrapPanel Margin="10" Orientation="Vertical">
+                            <TextBlock FontSize="20" Text="Шахси аник карда шуда" />
+                            <TextBlock
+                                Name="uiNameOfPerson"
+                                Margin="10,0"
+                                Text="{Binding FaceName}" />
+                        </WrapPanel>
+                    </TabItem>
+                    <TabItem Header="Ба қайд гири">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <StackPanel Margin="5,10">
+                                <TextBlock Text="Номи падари" />
+                                <TextBox
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Margin="5,10">
+                                <TextBlock />
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Margin="5,10">
+                                <TextBlock />
+                            </StackPanel>
+                            <StackPanel Grid.Row="3" Margin="5,10">
+                                <TextBlock />
+                            </StackPanel>
+                            <StackPanel Grid.Row="4" Margin="5,10">
+                                <TextBlock />
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
             </Border>
 
             <!--<Image x:Name="imgDetectFace"
@@ -68,14 +102,5 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom" />-->
         </Grid>
-
-        <!--<TextBlock
-            x:Name="lblFaceName"
-            Grid.Row="1"
-            Width="Auto"
-            Height="45"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Bottom"
-            FontSize="22" />-->
     </Grid>
 </mahappsControls:MetroWindow>
