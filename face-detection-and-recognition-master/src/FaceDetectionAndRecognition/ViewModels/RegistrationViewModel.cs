@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FaceDetectionAndRecognition.ViewModels
 {
-    public class Registration : INotifyPropertyChanged
+    public class RegistrationViewModel : INotifyPropertyChanged
     {
         string _firstName;
         public string FirstName

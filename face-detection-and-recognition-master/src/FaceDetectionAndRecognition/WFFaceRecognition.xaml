@@ -64,9 +64,10 @@
                                 Text="{Binding FaceName}" />
                         </WrapPanel>
                     </TabItem>
-                    <TabItem Header="Ба қайд гири">
+                    <TabItem DataContext="{Binding RegistrationView}" Header="Ба қайд гири">
                         <Grid>
                             <Grid.RowDefinitions>
+                                <RowDefinition />
                                 <RowDefinition />
                                 <RowDefinition />
                                 <RowDefinition />
@@ -75,20 +76,25 @@
                             </Grid.RowDefinitions>
                             <StackPanel Margin="5,10">
                                 <TextBlock Text="Номи падари" />
-                                <TextBox
+                                <TextBox Margin="5" Text="{Binding LastName}" />
                             </StackPanel>
                             <StackPanel Grid.Row="1" Margin="5,10">
-                                <TextBlock />
+                                <TextBlock Text="Номи" />
+                                <TextBox Margin="5" Text="{Binding LastName}" />
                             </StackPanel>
                             <StackPanel Grid.Row="2" Margin="5,10">
-                                <TextBlock />
+                                <TextBlock Text="Санаи таваллуд" />
+                                <TextBox Margin="5" Text="{Binding Birthday}" />
                             </StackPanel>
                             <StackPanel Grid.Row="3" Margin="5,10">
-                                <TextBlock />
+                                <TextBlock Text="Номи падари" />
+                                <TextBox Margin="5" Text="{Binding PhoneNumber}" />
                             </StackPanel>
                             <StackPanel Grid.Row="4" Margin="5,10">
-                                <TextBlock />
+                                <TextBlock Text="Номи падари" />
+                                <TextBox Margin="5" Text="{Binding Address}" />
                             </StackPanel>
+                            <Button Content="Сабит" Name="uiSavePerson" Click="uiSavePerson_Click" />
                         </Grid>
                     </TabItem>
                 </TabControl>

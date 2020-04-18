@@ -1,6 +1,7 @@
 ﻿using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
+using FaceDetectionAndRecognition.ViewModels;
 using MahApps.Metro.Controls;
 using Microsoft.Win32;
 using System;
@@ -19,59 +20,6 @@ namespace FaceDetectionAndRecognition
 
     public partial class WFFaceRecognition : MetroWindow, INotifyPropertyChanged
     {
-        #region Properties
-        public event PropertyChangedEventHandler PropertyChanged;
-        private Capture videoCapture;
-        private HaarCascade haarCascade;
-        private Image<Bgr, Byte> bgrFrame = null;
-        private Image<Gray, Byte> detectedFace = null;
-        private List<FaceData> faceList = new List<FaceData>();
-        private List<Image<Gray, Byte>> imageList = new List<Image<Gray, byte>>();
-        private List<string> lList = new List<string>();
-        private Timer captureTimer;
-        #region FaceName
-        private string faceName;
-        public string FaceName
-        {
-            get { return faceName; }
-            set
-            {
-                faceName = value.ToUpper();
-                //lblFaceName.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { lblFaceName.Text = faceName; }));
-                NotifyPropertyChanged();
-            }
-        }
-        #endregion
-        #region CameraCaptureImage
-        private Bitmap cameraCapture;
-        public Bitmap CameraCapture
-        {
-            get { return cameraCapture; }
-            set
-            {
-                cameraCapture = value;
-                imgCamera.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { imgCamera.Source = BitmapToImageSource(cameraCapture); }));
-                NotifyPropertyChanged();
-            }
-        }
-        #endregion
-        #region CameraCaptureFaceImage
-        private Bitmap cameraCaptureFace;
-        public Bitmap CameraCaptureFace
-        {
-            get { return cameraCaptureFace; }
-            set
-            {
-                cameraCaptureFace = value;
-                //imgDetectFace.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { imgDetectFace.Source = BitmapToImageSource(cameraCaptureFace); }));
-                // imgCamera.Source = BitmapToImageSource(cameraCapture);
-                NotifyPropertyChanged();
-            }
-        }
-        #endregion
-        #endregion
-
-        #region Constructor
         public WFFaceRecognition()
         {
             InitializeComponent();
@@ -83,6 +31,62 @@ namespace FaceDetectionAndRecognition
             captureTimer.Elapsed += CaptureTimer_Elapsed;
             DataContext = this;
         }
+
+        #region Fields
+        public event PropertyChangedEventHandler PropertyChanged;
+        Capture videoCapture;
+        HaarCascade haarCascade;
+        Image<Bgr, Byte> bgrFrame = null;
+        Image<Gray, Byte> detectedFace = null;
+        List<FaceData> faceList = new List<FaceData>();
+        List<Image<Gray, Byte>> imageList = new List<Image<Gray, byte>>();
+        List<string> lList = new List<string>();
+        Timer captureTimer;
+        #endregion
+
+        #region Properties
+
+
+
+        string faceName;
+        public string FaceName
+        {
+            get { return faceName; }
+            set
+            {
+                faceName = value.ToUpper();
+                //lblFaceName.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { lblFaceName.Text = faceName; }));
+                NotifyPropertyChanged();
+            }
+        }
+
+        Bitmap cameraCapture;
+        public Bitmap CameraCapture
+        {
+            get { return cameraCapture; }
+            set
+            {
+                cameraCapture = value;
+                imgCamera.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { imgCamera.Source = BitmapToImageSource(cameraCapture); }));
+                NotifyPropertyChanged();
+            }
+        }
+
+        Bitmap cameraCaptureFace;
+        public Bitmap CameraCaptureFace
+        {
+            get { return cameraCaptureFace; }
+            set
+            {
+                cameraCaptureFace = value;
+                //imgDetectFace.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { imgDetectFace.Source = BitmapToImageSource(cameraCaptureFace); }));
+                // imgCamera.Source = BitmapToImageSource(cameraCapture);
+                NotifyPropertyChanged();
+            }
+        }
+
+        public RegistrationViewModel RegistrationView { get; set; }
+
         #endregion
 
         #region Event
@@ -241,8 +245,12 @@ namespace FaceDetectionAndRecognition
             }
         }
 
+
         #endregion
 
+        private void uiSavePerson_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }

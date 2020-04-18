@@ -79,7 +79,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="Database\EntityContext.cs" />
     <Compile Include="FaceData.cs" />
-    <Compile Include="ViewModels\Registration.cs" />
+    <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="WFAbout.xaml.cs">
       <DependentUpon>WFAbout.xaml</DependentUpon>
     </Compile>
