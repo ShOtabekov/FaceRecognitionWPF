@@ -7,8 +7,8 @@
     xmlns:mahappsControls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Барномаи шинохти шахсият аз рӯи қиёфа -2020"
-    Width="600"
-    Height="500"
+    Width="1000"
+    Height="600"
     FontSize="14"
     Loaded="Window_Loaded"
     WindowStartupLocation="CenterScreen"
@@ -80,21 +80,21 @@
                             </StackPanel>
                             <StackPanel Grid.Row="1" Margin="5,10">
                                 <TextBlock Text="Номи" />
-                                <TextBox Margin="5" Text="{Binding LastName}" />
+                                <TextBox Margin="5" Text="{Binding FirstName}" />
                             </StackPanel>
                             <StackPanel Grid.Row="2" Margin="5,10">
                                 <TextBlock Text="Санаи таваллуд" />
                                 <TextBox Margin="5" Text="{Binding Birthday}" />
                             </StackPanel>
                             <StackPanel Grid.Row="3" Margin="5,10">
-                                <TextBlock Text="Номи падари" />
+                                <TextBlock Text="Раками телефон" />
                                 <TextBox Margin="5" Text="{Binding PhoneNumber}" />
                             </StackPanel>
                             <StackPanel Grid.Row="4" Margin="5,10">
-                                <TextBlock Text="Номи падари" />
+                                <TextBlock Text="Сурога" />
                                 <TextBox Margin="5" Text="{Binding Address}" />
                             </StackPanel>
-                            <Button Content="Сабит" Name="uiSavePerson" Click="uiSavePerson_Click" />
+                            <Button HorizontalAlignment="Right" Width="200" Height="50" Margin="10" Grid.Row="5" Content="Сабит" Name="uiSavePerson" Click="uiSavePerson_Click" />
                         </Grid>
                     </TabItem>
                 </TabControl>

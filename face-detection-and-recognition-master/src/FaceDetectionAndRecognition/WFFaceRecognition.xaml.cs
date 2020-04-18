@@ -30,6 +30,7 @@ namespace FaceDetectionAndRecognition
             };
             captureTimer.Elapsed += CaptureTimer_Elapsed;
             DataContext = this;
+            this.RegistrationView = new RegistrationViewModel();
         }
 
         #region Fields
@@ -95,7 +96,7 @@ namespace FaceDetectionAndRecognition
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        void Window_Loaded(object sender, RoutedEventArgs e)
         {
             GetFacesList();
             videoCapture = new Capture(Config.ActiveCameraIndex);
@@ -104,16 +105,16 @@ namespace FaceDetectionAndRecognition
             videoCapture.SetCaptureProperty(CAP_PROP.CV_CAP_PROP_FRAME_WIDTH, 370);
             captureTimer.Start();
         }
-        private void CaptureTimer_Elapsed(object sender, ElapsedEventArgs e)
+        void CaptureTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             ProcessFrame();
         }
-        private void AboutButton_Click(object sender, RoutedEventArgs e)
+        void AboutButton_Click(object sender, RoutedEventArgs e)
         {
             WFAbout wfAbout = new WFAbout();
             wfAbout.ShowDialog();
         }
-        private void NewFaceButton_Click(object sender, RoutedEventArgs e)
+        void NewFaceButton_Click(object sender, RoutedEventArgs e)
         {
             if (detectedFace == null)
             {
@@ -130,7 +131,7 @@ namespace FaceDetectionAndRecognition
             GetFacesList();
             MessageBox.Show("Бомуваффикият сабт шуд .");
         }
-        private void OpenVideoFile_Click(object sender, RoutedEventArgs e)
+        void OpenVideoFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openDialog = new OpenFileDialog();
             if (openDialog.ShowDialog().Value == true)
@@ -250,7 +251,20 @@ namespace FaceDetectionAndRecognition
 
         private void uiSavePerson_Click(object sender, RoutedEventArgs e)
         {
-
+            if (detectedFace == null)
+            {
+                MessageBox.Show("Қиёфа ёфт нашуд.");
+                return;
+            }
+            //Save detected face
+            detectedFace = detectedFace.Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
+            detectedFace.Save(Config.FacePhotosPath + "face" + (faceList.Count + 1) + Config.ImageFileExtension);
+            StreamWriter writer = new StreamWriter(Config.FaceListTextFile, true);
+            string personName = Microsoft.VisualBasic.Interaction.InputBox("Номро дохил намоед");
+            writer.WriteLine(String.Format("face{0}:{1}", (faceList.Count + 1), personName));
+            writer.Close();
+            GetFacesList();
+            MessageBox.Show("Бомуваффикият сабт шуд .");
         }
     }
 }
