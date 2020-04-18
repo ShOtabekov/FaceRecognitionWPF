@@ -79,6 +79,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="Database\EntityContext.cs" />
     <Compile Include="FaceData.cs" />
+    <Compile Include="Model\Person.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="WFAbout.xaml.cs">
       <DependentUpon>WFAbout.xaml</DependentUpon>
@@ -247,6 +248,15 @@
     </PackageReference>
     <PackageReference Include="MahApps.Metro.Resources">
       <Version>0.6.1</Version>
+    </PackageReference>
+    <PackageReference Include="SQLite.CodeFirst">
+      <Version>1.5.3.29</Version>
+    </PackageReference>
+    <PackageReference Include="System.Data.SQLite.Core">
+      <Version>1.0.112.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.Data.SQLite.EF6">
+      <Version>1.0.112.1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

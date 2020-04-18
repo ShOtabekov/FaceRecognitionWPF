@@ -1,6 +1,8 @@
 ﻿using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
+using FaceDetectionAndRecognition.Database;
+using FaceDetectionAndRecognition.Model;
 using FaceDetectionAndRecognition.ViewModels;
 using MahApps.Metro.Controls;
 using Microsoft.Win32;
@@ -30,6 +32,10 @@ namespace FaceDetectionAndRecognition
             };
             captureTimer.Elapsed += CaptureTimer_Elapsed;
             DataContext = this;
+            var context = EntityContext.CreateInstance();
+            var person = new Person();
+            context.Persons.Add(person);
+            context.SaveChanges();
             this.RegistrationView = new RegistrationViewModel();
         }
 
