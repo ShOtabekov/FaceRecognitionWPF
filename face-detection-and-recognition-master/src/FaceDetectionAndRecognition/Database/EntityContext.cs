@@ -10,23 +10,23 @@ namespace FaceDetectionAndRecognition.Database
     {
         public EntityContext() : base(new SQLiteConnection()
         {
-            ConnectionString =
-            new SQLiteConnectionStringBuilder()
-            { DataSource = "FaceDetectionAndRecognition.db", ForeignKeys = true }
-            .ConnectionString
+            ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = "FaceDetectionAndRecognition.db", ForeignKeys = true }.ConnectionString
         }, true)
         {
 
         }
-        public DbSet<Person> Persons { get; set; }
+        public DbSet<User> Users { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            var builder = modelBuilder.Entity<Person>();
-            builder.ToTable(nameof(Person));
+            var builder = modelBuilder.Entity<User>();
+            builder.ToTable(nameof(User));
             builder.HasKey(p => p.Id);
+            var model = modelBuilder.Build(Database.Connection);
             var sqliteConnectionInitializer = new SqliteCreateDatabaseIfNotExists<EntityContext>(modelBuilder);
-            //Database.SetInitializer(sqliteConnectionInitializer);
             DataBase.SetInitializer(sqliteConnectionInitializer);
+            //sqliteConnectionInitializer.InitializeDatabase(this);
+            //IDatabaseCreator sqliteDatabaseCreator = new SqliteDatabaseCreator();
+            //sqliteDatabaseCreator.Create(Database, model);
         }
 
 
@@ -34,7 +34,6 @@ namespace FaceDetectionAndRecognition.Database
         public static EntityContext CreateInstance()
         {
             var context = new EntityContext();
-            context.Database.CreateIfNotExists();
             return context;
         }
 

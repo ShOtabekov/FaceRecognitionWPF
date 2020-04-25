@@ -33,9 +33,9 @@ namespace FaceDetectionAndRecognition
             captureTimer.Elapsed += CaptureTimer_Elapsed;
             DataContext = this;
             var context = EntityContext.CreateInstance();
-            var person = new Person();
-            context.Persons.Add(person);
-            context.SaveChanges();
+            //var person = new User();
+            //context.Users.Add(person);
+            //context.SaveChanges();
             this.RegistrationView = new RegistrationViewModel();
         }
 
@@ -197,12 +197,14 @@ namespace FaceDetectionAndRecognition
                     MCvAvgComp[][] faces = grayframe.DetectHaarCascade(haarCascade, 1.2, 10, HAAR_DETECTION_TYPE.DO_CANNY_PRUNING, new System.Drawing.Size(20, 20));
 
                     FaceName = "Қиёфа ётф нашуд!!!!";
-                    foreach (var face in faces[0])
+                    foreach (var item in faces)
                     {
-                        bgrFrame.Draw(face.rect, new Bgr(255, 255, 0), 2);
-                        detectedFace = bgrFrame.Copy(face.rect).Convert<Gray, byte>();
-                        FaceRecognition();
-                        break;
+                        foreach (var face in item)
+                        {
+                            bgrFrame.Draw(face.rect, new Bgr(255, 255, 0), 2);
+                            detectedFace = bgrFrame.Copy(face.rect).Convert<Gray, byte>();
+                            FaceRecognition();
+                        }
                     }
                     CameraCapture = bgrFrame.ToBitmap();
                 }
@@ -262,11 +264,15 @@ namespace FaceDetectionAndRecognition
                 MessageBox.Show("Қиёфа ёфт нашуд.");
                 return;
             }
+            var personName = $"{RegistrationView.FirstName} {RegistrationView.LastName}";
+            if (string.IsNullOrEmpty(personName.Trim()) || string.IsNullOrEmpty(RegistrationView.FirstName) || string.IsNullOrEmpty(RegistrationView.LastName))
+            {
+                MessageBox.Show("Пеш аз сабт кар шумо бояд ном ва насабро дароред");
+            }
             //Save detected face
             detectedFace = detectedFace.Resize(100, 100, Emgu.CV.CvEnum.INTER.CV_INTER_CUBIC);
             detectedFace.Save(Config.FacePhotosPath + "face" + (faceList.Count + 1) + Config.ImageFileExtension);
             StreamWriter writer = new StreamWriter(Config.FaceListTextFile, true);
-            string personName = Microsoft.VisualBasic.Interaction.InputBox("Номро дохил намоед");
             writer.WriteLine(String.Format("face{0}:{1}", (faceList.Count + 1), personName));
             writer.Close();
             GetFacesList();

@@ -94,7 +94,15 @@
                                 <TextBlock Text="Сурога" />
                                 <TextBox Margin="5" Text="{Binding Address}" />
                             </StackPanel>
-                            <Button HorizontalAlignment="Right" Width="200" Height="50" Margin="10" Grid.Row="5" Content="Сабит" Name="uiSavePerson" Click="uiSavePerson_Click" />
+                            <Button
+                                Name="uiSavePerson"
+                                Grid.Row="5"
+                                Width="200"
+                                Height="50"
+                                Margin="10"
+                                HorizontalAlignment="Right"
+                                Click="uiSavePerson_Click"
+                                Content="Сабит" />
                         </Grid>
                     </TabItem>
                 </TabControl>
